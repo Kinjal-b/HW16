@@ -273,24 +273,35 @@ Both YOLO and SSD have significantly advanced the field of object detection, off
 
 Non-maximum suppression (NMS) is a crucial post-processing technique used in object detection algorithms to refine their output. It helps in reducing redundancy among the detected bounding boxes, ensuring that each detected object is represented by a single bounding box. This process is essential for achieving clean and accurate detection results, especially in scenarios where the detection algorithm predicts multiple overlapping boxes for the same object.
 
-How Non-max Suppression Works
-Start with a List of Bounding Boxes: After an object detection model predicts bounding boxes for objects in an image, you typically have a list of boxes for each object class, along with their confidence scores (the model's certainty that a box contains an object of interest).
+#### How Non-max Suppression Works 
 
-Sort Boxes by Confidence: The bounding boxes are sorted in descending order based on their confidence scores.
+1. Start with a List of Bounding Boxes: 
+After an object detection model predicts bounding boxes for objects in an image, you typically have a list of boxes for each object class, along with their confidence scores (the model's certainty that a box contains an object of interest).
 
-Select the Box with the Highest Confidence: The box with the highest score is selected as a reference point, and it's assumed to be the most accurate prediction for a given object.
+2. Sort Boxes by Confidence: 
+The bounding boxes are sorted in descending order based on their confidence scores.
 
-Compare with Other Boxes: The selected box is compared with the other boxes in the list. If another box has a significant overlap with the selected box (as measured by the Intersection over Union (IoU) metric), it is considered to be detecting the same object and hence is suppressed (removed from the list).
+3. Select the Box with the Highest Confidence: 
+The box with the highest score is selected as a reference point, and it's assumed to be the most accurate prediction for a given object.
 
-Repeat Until No Overlapping Boxes Remain: This process is repeated, each time with the next highest confidence box, until no overlapping boxes remain for that class. The suppression is done separately for each object class.
+4. Compare with Other Boxes: 
+The selected box is compared with the other boxes in the list. If another box has a significant overlap with the selected box (as measured by the Intersection over Union (IoU) metric), it is considered to be detecting the same object and hence is suppressed (removed from the list).
 
-Final Detection Output: The boxes that remain after this process are considered the final detections, with each representing a unique object instance.
+5. Repeat Until No Overlapping Boxes Remain: 
+This process is repeated, each time with the next highest confidence box, until no overlapping boxes remain for that class. The suppression is done separately for each object class.
 
-Why Non-max Suppression Is Needed
-Redundancy Reduction: Object detection models, especially those using anchor boxes or sliding windows, often generate multiple bounding boxes that closely overlap, all detecting the same object. NMS ensures that each detected object is represented by only one bounding box, the one with the highest confidence.
+6. Final Detection Output: 
+The boxes that remain after this process are considered the final detections, with each representing a unique object instance.
 
-Increased Accuracy and Clarity: By eliminating less confident and redundant boxes, NMS increases the overall accuracy and clarity of the detection output. This is particularly important for applications where precise object localization is critical, such as in autonomous driving, surveillance, and facial recognition.
+#### Why Non-max Suppression Is Needed
 
-Efficiency: NMS also contributes to computational efficiency in downstream processing. Fewer bounding boxes mean less processing in applications that utilize detection outputs for further analysis.
+1. Redundancy Reduction: 
+Object detection models, especially those using anchor boxes or sliding windows, often generate multiple bounding boxes that closely overlap, all detecting the same object. NMS ensures that each detected object is represented by only one bounding box, the one with the highest confidence.
+
+2. Increased Accuracy and Clarity: 
+By eliminating less confident and redundant boxes, NMS increases the overall accuracy and clarity of the detection output. This is particularly important for applications where precise object localization is critical, such as in autonomous driving, surveillance, and facial recognition.
+
+3. Efficiency: 
+NMS also contributes to computational efficiency in downstream processing. Fewer bounding boxes mean less processing in applications that utilize detection outputs for further analysis.
 
 Non-max suppression is a simple yet effective way to improve the results of object detection systems, making it an indispensable step in most modern object detection workflows.
